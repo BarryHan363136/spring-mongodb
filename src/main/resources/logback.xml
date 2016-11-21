@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <if condition='isDefined("catalina.base")'>
+    <then>
+      <appender name="FILE"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.base}/logs/telematics.log</file>
+        <append>true</append>
+        <prudent>true</prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+          <!-- Daily rollover -->
+          <fileNamePattern>${catalina.base}/logs/telematics.%d{yyyy-MM-dd}.log
+          </fileNamePattern>
+          <!-- Keep 7 days' worth of history -->
+          <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+          <pattern>%d{HH:mm:ss.SSS} {%t} %-5level [telematics] %logger - %msg%n</pattern>
+        </encoder>
+      </appender>
+      <root level="trace">
+        <appender-ref ref="FILE" />
+      </root>
+    </then>
+
+  </if>
+  <appender name="FILE"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>d:/logs/telematics.log</file>
+        <append>true</append>
+        <prudent>true</prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+          <!-- Daily rollover -->
+          <fileNamePattern>d:/logs/telematics.%d{yyyy-MM-dd}.log
+          </fileNamePattern>
+          <!-- Keep 7 days' worth of history -->
+          <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+          <pattern>%d{HH:mm:ss.SSS} {%t} %-5level [telematics] %logger - %msg%n</pattern>
+        </encoder>
+      </appender>
+    
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} {%t} %-5level [telematics] %logger - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <root level="trace">
+    <appender-ref ref="CONSOLE" />
+     
+        <appender-ref ref="FILE" />
+      
+  </root>
+  <logger name="org.springframework.jms.listener.DefaultMessageListenerContainer" level="info"/>
+  <logger name="org.apache.activemq.transport.AbstractInactivityMonitor" level="info" />
+  <logger name="org.apache.zookeeper.ClientCnxn" level="info" />
+  <logger name="org.apache.http.impl.nio.conn.PoolingNHttpClientConnectionManager" level="info"/>
+</configuration>
